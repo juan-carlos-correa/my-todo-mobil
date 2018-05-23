@@ -16,8 +16,8 @@ export default class App extends React.Component {
 
   removeText = () => this.setState({ text: '' })
 
-  handlePressSubmit = (todo) => {
-    this.addTodo(todo)
+  handlePressSubmit = () => {
+    this.addTodo(this.state.text)
     this.removeText()
   }
 
