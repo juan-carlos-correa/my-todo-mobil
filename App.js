@@ -17,7 +17,7 @@ export default class App extends React.Component {
   removeText = () => this.setState({ text: '' })
 
   handlePressSubmit = () => {
-    this.addTodo(this.state.text)
+    this.addTodo({ text: this.state.text, key: this.state.todos.length })
     this.removeText()
   }
 
@@ -29,7 +29,7 @@ export default class App extends React.Component {
           handlePressSubmit={ this.handlePressSubmit }
           text={ this.state.text }
         />
-        <Body />
+        <Body todos={ this.state.todos }/>
       </View>
     )
   }

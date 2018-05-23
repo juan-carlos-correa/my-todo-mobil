@@ -1,11 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 
 export default class Body extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text>Body</Text>
+        <FlatList
+          data={ this.props.todos }
+          renderItem={ ({ item }) => <Text>{ item.text }</Text> }
+          keyExtractor={ (item, index) => index.toString() }
+        />
       </View>
     )
   }
@@ -14,8 +18,6 @@ export default class Body extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 9,
-    backgroundColor: '#eceff1',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: '#eceff1'
   }
 })
