@@ -21,6 +21,13 @@ export default class App extends React.Component {
     this.removeText()
   }
 
+  removeTodo = key => {
+    let todos = this.state.todos.filter(todo => todo.key !== key)
+    this.setState({
+      todos
+    })
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -29,7 +36,7 @@ export default class App extends React.Component {
           handlePressSubmit={ this.handlePressSubmit }
           text={ this.state.text }
         />
-        <Body todos={ this.state.todos }/>
+        <Body todos={ this.state.todos } removeTodo={ this.removeTodo } />
       </View>
     )
   }

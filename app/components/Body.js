@@ -8,7 +8,7 @@ export default class Body extends React.Component {
       <View style={styles.container}>
         <FlatList
           data={ this.props.todos }
-          renderItem={ ({ item }) => <Task task={ item }></Task> }
+          renderItem={ ({ item }) => <Task task={ item } handlePressRemove={ this.props.removeTodo }></Task> }
           keyExtractor={ (item, index) => index.toString() }
         />
       </View>
