@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import Header from './app/components/Header'
 import Body from './app/components/Body'
 
@@ -12,11 +12,23 @@ export default class App extends React.Component {
 
   handleTextChange = text => this.setState({ text })
 
+  addTodo = todo => this.setState({ todos: [...this.state.todos, todo]})
+
+  removeText = () => this.setState({ text: '' })
+
+  handlePressSubmit = (todo) => {
+    this.addTodo(todo)
+    this.removeText()
+  }
+
   render () {
     return (
       <View style={styles.container}>
-        <Header onChange={this.handleTextChange}/>
-        <Text>{this.state.text}</Text>
+        <Header
+          onChange={ this.handleTextChange }
+          handlePressSubmit={ this.handlePressSubmit }
+          text={ this.state.text }
+        />
         <Body />
       </View>
     )

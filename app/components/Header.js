@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, View, TextInput } from 'react-native'
 
 export default class header extends React.Component {
   render () {
@@ -7,8 +7,10 @@ export default class header extends React.Component {
       <View style={styles.container}>
         <TextInput
           style={styles.text}
-          placeholder="Siguiente actividad por hacer es..."
+          placeholder="Next todo..."
           onChangeText={ this.props.onChange }
+          onSubmitEditing={ this.props.handlePressSubmit }
+          value={ this.props.text }
         />
       </View>
     )
