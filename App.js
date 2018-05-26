@@ -2,17 +2,22 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import Header from './app/components/Header'
 import Body from './app/components/Body'
+import { setItem, getItem } from './app/utils/asyncStorage'
 
 export default class App extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = { todos: [], text: '' }
+    this.state = { todos: [], text: '', isLoading: true }
   }
 
   handleTextChange = text => this.setState({ text })
 
-  addTodo = todo => this.setState({ todos: [...this.state.todos, todo]})
+  addTodo = async (todo) => {
+    const todos = [...this.state.todos, todo]
+    await setItem('myAppTodo@todos', todos)
+    this.setState({ todos })
+  }
 
   removeText = () => this.setState({ text: '' })
 
@@ -21,11 +26,15 @@ export default class App extends React.Component {
     this.removeText()
   }
 
-  removeTodo = key => {
+  removeTodo = async key => {
     let todos = this.state.todos.filter(todo => todo.key !== key)
-    this.setState({
-      todos
-    })
+    await setItem('myAppTodo@todos', todos)
+    this.setState({ todos })
+  }
+
+  async componentDidMount () {
+    const todos = await getItem('myAppTodo@todos')
+    this.setState({ isLoading: false, todos })
   }
 
   render () {
