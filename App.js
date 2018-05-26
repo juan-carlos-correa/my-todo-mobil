@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 import Header from './app/components/Header'
 import Body from './app/components/Body'
 import { setItem, getItem } from './app/utils/asyncStorage'
@@ -45,7 +45,16 @@ export default class App extends React.Component {
           handlePressSubmit={ this.handlePressSubmit }
           text={ this.state.text }
         />
-        <Body todos={ this.state.todos } removeTodo={ this.removeTodo } />
+
+        {
+          this.state.isLoading &&
+            <ActivityIndicator size="large" color="gray" style={styles.activityIndicator} />
+        }
+
+        {
+          !this.state.isLoading &&
+            <Body todos={ this.state.todos } removeTodo={ this.removeTodo } />
+        }
       </View>
     )
   }
@@ -55,5 +64,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff'
+  },
+  activityIndicator: {
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: '#eceff1'
   }
 })
